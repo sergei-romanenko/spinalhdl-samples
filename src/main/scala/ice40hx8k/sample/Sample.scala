@@ -16,22 +16,23 @@
  * License along with this library.
  */
 
-package mylib
+package ice40hx8k.sample
 
 import spinal.core._
 import spinal.lib._
 
 import scala.util.Random
 
+//noinspection TypeAnnotation
 //Hardware definition
-class MyTopLevel extends Component {
+case class Sample() extends Component {
   val io = new Bundle {
     val cond0 = in  Bool
     val cond1 = in  Bool
     val flag  = out Bool
     val state = out UInt(8 bits)
   }
-  val counter = Reg(UInt(8 bits)) init(0)
+  val counter = RegInit(U(0, 8 bits))
 
   when(io.cond0){
     counter := counter + 1
@@ -42,26 +43,29 @@ class MyTopLevel extends Component {
 }
 
 //Generate the MyTopLevel's Verilog
-object MyTopLevelVerilog {
+object SampleMainVerilog {
   def main(args: Array[String]) {
-    SpinalVerilog(new MyTopLevel)
+    SpinalVerilog(Sample())
   }
 }
 
 //Generate the MyTopLevel's VHDL
-object MyTopLevelVhdl {
+object SampleMainVhdl {
   def main(args: Array[String]) {
-    SpinalVhdl(new MyTopLevel)
+    SpinalConfig(targetDirectory = "rtl/ice40hx8k/Sample").generateVerilog(Sample())
+
   }
 }
 
 
 //Define a custom SpinalHDL configuration with synchronous reset instead of the default asynchronous one. This configuration can be resued everywhere
-object MySpinalConfig extends SpinalConfig(defaultConfigForClockDomains = ClockDomainConfig(resetKind = SYNC))
+object SampleVerilogConfig extends SpinalConfig(
+  targetDirectory = "rtl/ice40hx8k/Sample",
+  defaultConfigForClockDomains = ClockDomainConfig(resetKind = SYNC))
 
 //Generate the MyTopLevel's Verilog using the above custom configuration.
-object MyTopLevelVerilogWithCustomConfig {
+object SamplelVerilogWithCustomConfig {
   def main(args: Array[String]) {
-    MySpinalConfig.generateVerilog(new MyTopLevel)
+    SampleVerilogConfig.generateVerilog(new Sample)
   }
 }

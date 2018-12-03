@@ -1,4 +1,4 @@
-name := "SpinalTemplateSbt"
+name := "SpinalHDLSamples"
 
 version := "1.0"
 
