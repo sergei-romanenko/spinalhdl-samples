@@ -1,0 +1,11 @@
+set_io -nowarn clk J3
+set_io -nowarn io_tick C3
+
+#set_io -nowarn  leds[0] C3
+set_io -nowarn  leds[1] B3
+set_io -nowarn  leds[2] C4
+set_io -nowarn  leds[3] C5
+set_io -nowarn  leds[4] A1
+set_io -nowarn  leds[5] A2
+set_io -nowarn  leds[6] B4
+set_io -nowarn  leds[7] B5

@@ -1,0 +1,10 @@
+root = true
+
+# 2 space indentation
+[*.scala]
+indent_style = space
+indent_size = 2
+
+[*.v]
+indent_style = space
+indent_size = 2

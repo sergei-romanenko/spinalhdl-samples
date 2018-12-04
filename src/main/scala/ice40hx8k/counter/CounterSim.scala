@@ -7,7 +7,7 @@ import spinal.core.sim._
 //noinspection FieldFromDelayedInit
 object CounterSim {
   def main(args: Array[String]) {
-    val compiled = SimConfig.withWave.compile(Counter(WIDTH = 6, NLEDS = 4))
+    val compiled = SimConfig.withWave.compile(Counter(width = 6, nleds = 4))
     //SimConfig.withWave.doSim(Counter(WIDTH = 6, NLEDS = 4)) { dut =>
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
@@ -16,7 +16,7 @@ object CounterSim {
 
       Suspendable.repeat (100) {
         dut.clockDomain.waitSampling()
-        val high = cnt >> (dut.WIDTH - dut.NLEDS)
+        val high = cnt >> (dut.width - dut.nleds)
         assert(dut.io.leds.toInt == high)
         cnt = (cnt + 1) & 0x3F
       }

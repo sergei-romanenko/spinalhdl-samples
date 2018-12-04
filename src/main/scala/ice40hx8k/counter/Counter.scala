@@ -4,13 +4,13 @@ import spinal.core._
 import spinal.lib._
 
 //noinspection TypeAnnotation
-case class Counter(WIDTH: Int = 30, NLEDS: Int = 8) extends Component {
+case class Counter(width: Int = 30, nleds: Int = 8) extends Component {
   val io = new Bundle {
-    val leds = out UInt (NLEDS bits)
+    val leds = out UInt (nleds bits)
   }
 
-  private val cnt = RegInit(U(0, WIDTH bits))
-  io.leds := cnt(WIDTH - 1 downto WIDTH - NLEDS)
+  private val cnt = RegInit(U(0, width bits))
+  io.leds := cnt(width - 1 downto width - nleds)
 
   cnt := cnt + 1
 }
