@@ -1,4 +1,4 @@
-package ice40hx8k.counter
+package obijuan.t04counter
 
 import spinal.core._
 import spinal.lib._

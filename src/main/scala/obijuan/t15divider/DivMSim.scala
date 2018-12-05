@@ -1,4 +1,4 @@
-package ice40hx8k.divm
+package obijuan.t15divider
 
 import spinal.core._
 import spinal.core.sim._
