@@ -1,6 +1,6 @@
 package obijuan.t17tones
 
-object Frequence {
+object Freq {
   // MHz
   val F_4MHz = 3
   val F_3MHz = 4

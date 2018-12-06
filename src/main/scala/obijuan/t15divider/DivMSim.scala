@@ -7,18 +7,12 @@ import spinal.sim._
 //noinspection TypeAnnotation,FieldFromDelayedInit
 object DivMSim {
 
-  case class DivMDut() extends Component {
-    val io = new Bundle {
-      val tick = out Bool
-    }
-
-    val dummy = Reg(Bool) init False
-    val dm = DivM(M = 6)
-    io.tick := dm.io.tick
-  }
-
   def main(args: Array[String]) {
-    val compiled = SimConfig.withWave.compile(DivMDut())
+    val compiled = SimConfig
+      .withConfig(SpinalConfig(
+        defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT)))
+      .withWave
+      .compile(DivM(M = 6))
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
 

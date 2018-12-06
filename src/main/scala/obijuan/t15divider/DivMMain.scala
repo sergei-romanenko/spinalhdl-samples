@@ -4,6 +4,9 @@ import spinal.core._
 
 object DivMMain {
   def main(args: Array[String]) {
-    SpinalConfig(targetDirectory = "rtl/obijuan/DivM").generateVerilog(DivM())
+    SpinalConfig(
+      defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
+      targetDirectory = "rtl/obijuan/t15divider"
+    ).generateVerilog(DivM())
   }
 }
