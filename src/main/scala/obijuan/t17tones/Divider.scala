@@ -1,10 +1,10 @@
-package obijuan.t15divider
+package obijuan.t17tones
 
 import spinal.core._
 import spinal.lib._
 
 //noinspection TypeAnnotation
-case class DivM(M: Long = 12000000) extends Component {
+case class Divider(M: Long = Frequence.F_2KHz) extends Component {
   val io = new Bundle {
     val tick = out Bool
   }

@@ -1,0 +1,6 @@
+set_io -nowarn clk J3
+
+set_io io_ch0  C1
+set_io io_ch1  C2
+set_io io_ch2  D1
+set_io io_ch3  D2
