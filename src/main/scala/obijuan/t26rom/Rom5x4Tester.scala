@@ -3,7 +3,7 @@ package obijuan.t26rom
 import spinal.core._
 import spinal.lib._
 
-//noinspection TypeAnnotation,FieldFromDelayedInit
+//noinspection TypeAnnotation,FieldFromDelayedInit,LanguageFeature
 case class Rom5x4Tester() extends Component {
   val io = new Bundle {
     val leds = out UInt(8 bits)

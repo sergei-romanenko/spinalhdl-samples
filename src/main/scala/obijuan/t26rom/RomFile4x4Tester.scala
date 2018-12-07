@@ -3,7 +3,12 @@ package obijuan.t26rom
 import spinal.core._
 
 //noinspection TypeAnnotation,FieldFromDelayedInit,LanguageFeature
-case class Rom4x4Tester(DELAY: Long = Freq.T_500ms) extends Component {
+case class RomFile4x4Tester
+(
+  DELAY: Long = Freq.T_500ms,
+  ROMFILE: String = "rom1.list"
+) extends Component {
+
   val io = new Bundle {
     val leds = out UInt (8 bits)
   }
@@ -15,7 +20,7 @@ case class Rom4x4Tester(DELAY: Long = Freq.T_500ms) extends Component {
   val start = RegInit(True)
   start := False
 
-  val rom = Rom4x4()
+  val rom = RomFile4x4(ROMFILE)
   val addr = RegInit(U(0, 4 bits))
   rom.io.addr := addr
 

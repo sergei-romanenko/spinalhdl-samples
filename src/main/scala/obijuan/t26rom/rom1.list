@@ -1,0 +1,20 @@
+// File: rom1.list
+// Each line corresponds to a position in the memory.
+     // This is a comment.
+// ROM1: contains the (hexadecimal) numbers from 0 to 15.
+0  // Position 0
+1  // Position 1
+02
+03
+04
+05
+06
+07
+08
+09
+0A
+0B
+0C
+0D
+0E
+0F
