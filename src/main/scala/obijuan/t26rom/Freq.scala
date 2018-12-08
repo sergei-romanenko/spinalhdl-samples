@@ -11,6 +11,7 @@ object Freq {
   //-- In milliseconds
   val T_500ms = 6000000
   val T_250ms = 3000000
+  val T_200ms = 2400000
   val T_100ms = 1200000
   val T_10ms = 120000
   val T_5ms = 60000
