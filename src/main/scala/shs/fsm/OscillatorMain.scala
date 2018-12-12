@@ -1,22 +1,19 @@
 package shs.fsm
 
 import spinal.core._
-import shs.lib._
-
-import shs.lib.Freq
 
 //noinspection TypeAnnotation,LanguageFeature,FieldFromDelayedInit
 case class OscillatorTester
 (
   N: Int = 8,
-  factor: BigInt = Freq.F_1Hz
+  frequency: HertzNumber = 1 Hz
 )
   extends Component {
   val io = new Bundle {
     val leds = out UInt (N bits)
   }
 
-  val oscillator = Oscillator(N, factor)
+  val oscillator = Oscillator(N, frequency)
 
   val width = log2Up(N)
   val ampl = UInt(width bits)
@@ -32,7 +29,8 @@ object OscillatorMain {
   def main(args: Array[String]) {
     SpinalConfig(
       defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
+      defaultClockDomainFrequency = FixedFrequency(12 MHz),
       targetDirectory = "rtl/shs/fsm"
-    ).generateVerilog(OscillatorTester(8, Freq.F_1Hz))
+    ).generateVerilog(OscillatorTester(8, 1 Hz))
   }
 }

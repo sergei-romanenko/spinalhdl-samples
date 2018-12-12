@@ -5,13 +5,13 @@ import spinal.lib._
 import spinal.lib.fsm._
 
 //noinspection TypeAnnotation,LanguageFeature,ForwardReference
-case class Oscillator(N: Int, factor: BigInt) extends Component {
+case class Oscillator(N: Int, frequency: HertzNumber) extends Component {
   val io = new Bundle {
     val width = log2Up(N)
     val ampl = out UInt (width bits)
   }
 
-  val slowArea = new SlowArea(factor = factor) {
+  val slowArea = new SlowArea(frequency) {
 
     val fsm = new StateMachine {
 
