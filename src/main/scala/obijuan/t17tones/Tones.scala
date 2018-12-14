@@ -2,8 +2,9 @@ package obijuan.t17tones
 
 import spinal.core._
 import spinal.lib._
+import obijuan.lib.Freq
 
-//noinspection TypeAnnotation,FieldFromDelayedInit
+//noinspection TypeAnnotation,FieldFromDelayedInit,LanguageFeature
 case class Tones
 (
   F0: Long = Freq.F_1KHz,
@@ -15,12 +16,12 @@ case class Tones
     val ch0, ch1, ch2, ch3 = out Bool
   }
 
-  val d0 = Divider(F0)
+  val d0 = ToneGen(F0)
   io.ch0 := d0.io.tick
-  val d1 = Divider(F1)
+  val d1 = ToneGen(F1)
   io.ch1 := d1.io.tick
-  val d2 = Divider(F2)
+  val d2 = ToneGen(F2)
   io.ch2 := d2.io.tick
-  val d3 = Divider(F3)
+  val d3 = ToneGen(F3)
   io.ch3 := d3.io.tick
 }

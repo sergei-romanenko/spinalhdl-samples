@@ -1,5 +1,6 @@
 package obijuan.t26rom
 
+import obijuan.lib._
 import spinal.core
 import spinal.core._
 

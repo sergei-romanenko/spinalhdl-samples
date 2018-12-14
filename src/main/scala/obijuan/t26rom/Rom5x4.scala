@@ -3,7 +3,7 @@ package obijuan.t26rom
 import spinal.core._
 import spinal.lib._
 
-//noinspection TypeAnnotation
+//noinspection TypeAnnotation,LanguageFeature
 case class Rom5x4() extends Component {
   val io = new Bundle {
     val addr = in UInt (5 bits)

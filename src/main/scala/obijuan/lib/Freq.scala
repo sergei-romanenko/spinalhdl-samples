@@ -1,4 +1,4 @@
-package obijuan.t26rom
+package obijuan.lib
 
 object Freq {
 
@@ -22,13 +22,13 @@ object Freq {
 
   //== Frequencies
 
-  //-- Megahertz  MHz
+  //-- Megahertz  (MHz)
   val F_4MHz = 3
   val F_3MHz = 4
   val F_2MHz = 6
   val F_1MHz = 12
 
-  //-- Kilohertz KHz
+  //-- Kilohertz (KHz)
   val F_40KHz = 300
   val F_8KHz = 1500
   val F_4KHz = 3000

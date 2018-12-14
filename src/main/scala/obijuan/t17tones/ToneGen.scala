@@ -2,9 +2,10 @@ package obijuan.t17tones
 
 import spinal.core._
 import spinal.lib._
+import obijuan.lib.Freq
 
-//noinspection TypeAnnotation
-case class Divider(M: Long = Freq.F_2KHz) extends Component {
+//noinspection TypeAnnotation,LanguageFeature
+case class ToneGen(M: Long = Freq.F_2KHz) extends Component {
   val io = new Bundle {
     val tick = out Bool
   }

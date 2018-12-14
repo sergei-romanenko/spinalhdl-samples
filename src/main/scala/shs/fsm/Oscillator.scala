@@ -15,7 +15,7 @@ case class Oscillator(N: Int, frequency: HertzNumber) extends Component {
 
     val fsm = new StateMachine {
 
-      val counter = RegInit(U(0, io.width bits))
+      val counter = RegInit(U(0, width bits))
 
       val UP: State = new State with EntryPoint {
         whenIsActive {
