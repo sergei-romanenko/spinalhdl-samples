@@ -5,7 +5,6 @@ import spinal.lib._
 
 import shs.lib._
 
-//noinspection TypeAnnotation,LanguageFeature,ForwardReference,FieldFromDelayedInit
 case class PWMTester(frequency: HertzNumber = 1 MHz) extends Component {
   val io = new Bundle {
     val switch_up = in Bool

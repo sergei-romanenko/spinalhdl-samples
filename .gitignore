@@ -17,7 +17,8 @@ project/plugins/project/
 .scala_dependencies
 .worksheet
 
-.idea
+/.idea/**/*.*
+!/.idea/inspectionProfiles/Project_Default.xml
 out
 
 # Eclipse

@@ -4,7 +4,6 @@ import obijuan.lib._
 import spinal.core
 import spinal.core._
 
-//noinspection TypeAnnotation,FieldFromDelayedInit,LanguageFeature
 case class MemRom4x4Tester
 (
   DELAY: Long = Freq.T_500ms,

@@ -4,7 +4,6 @@ import spinal.core._
 
 import obijuan.lib._
 
-//noinspection TypeAnnotation,LanguageFeature
 case class RomFile4x4(romfile: String = "rom1.list") extends Component {
   val io = new Bundle {
     val addr = in UInt (4 bits)

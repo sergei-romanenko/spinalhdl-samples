@@ -3,7 +3,6 @@ package obijuan.t27romparam
 import spinal.core._
 import obijuan.lib._
 
-//noinspection TypeAnnotation,LanguageFeature,FieldFromDelayedInit
 case class NoteGen(dw: Int = 16) extends Component {
   val io = new Bundle {
     val start = in Bool

@@ -4,7 +4,6 @@ import spinal.core._
 import spinal.sim._
 import spinal.core.sim._
 
-//noinspection FieldFromDelayedInit
 object CounterSim {
   def main(args: Array[String]) {
     val compiled = SimConfig.withWave.compile(Counter(width = 6, nleds = 4))

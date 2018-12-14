@@ -3,7 +3,6 @@ package shs.pwm
 import spinal.core._
 import spinal.lib._
 
-//noinspection TypeAnnotation,LanguageFeature,ForwardReference
 case class PWM(max: Int, frequency: HertzNumber) extends Component {
   val width = log2Up(max + 1)
   val io = new Bundle {

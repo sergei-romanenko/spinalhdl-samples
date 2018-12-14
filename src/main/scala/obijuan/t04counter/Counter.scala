@@ -3,7 +3,6 @@ package obijuan.t04counter
 import spinal.core._
 import spinal.lib._
 
-//noinspection TypeAnnotation,LanguageFeature
 case class Counter(width: Int = 30, nleds: Int = 8) extends Component {
   val io = new Bundle {
     val leds = out UInt (nleds bits)

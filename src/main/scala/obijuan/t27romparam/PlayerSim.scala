@@ -4,7 +4,6 @@ import spinal.core._
 import spinal.core.sim._
 import spinal.sim._
 
-//noinspection FieldFromDelayedInit,TypeAnnotation
 object PlayerSim {
   def main(args: Array[String]): Unit = {
     val compiled = SimConfig

@@ -3,7 +3,6 @@ package shs.lib
 import spinal.core._
 import spinal.lib._
 
-//noinspection TypeAnnotation,LanguageFeature,ForwardReference
 case class Debouncer() extends Component {
   val io = new Bundle {
     val switch_input = in Bool

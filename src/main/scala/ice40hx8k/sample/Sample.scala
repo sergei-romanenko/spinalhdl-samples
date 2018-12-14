@@ -23,7 +23,6 @@ import spinal.lib._
 
 import scala.util.Random
 
-//noinspection TypeAnnotation
 //Hardware definition
 case class Sample() extends Component {
   val io = new Bundle {

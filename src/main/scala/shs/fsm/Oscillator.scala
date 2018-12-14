@@ -4,7 +4,6 @@ import spinal.core._
 import spinal.lib._
 import spinal.lib.fsm._
 
-//noinspection TypeAnnotation,LanguageFeature,ForwardReference
 case class Oscillator(N: Int, frequency: HertzNumber) extends Component {
   val width = log2Up(N)
   val io = new Bundle {

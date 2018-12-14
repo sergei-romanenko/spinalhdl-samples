@@ -2,7 +2,6 @@ package shs.fsm
 
 import spinal.core._
 
-//noinspection TypeAnnotation,LanguageFeature,FieldFromDelayedInit
 case class OscillatorTester
 (
   N: Int = 8,
@@ -24,7 +23,6 @@ case class OscillatorTester
 }
 
 
-//noinspection LanguageFeature
 object OscillatorMain {
   def main(args: Array[String]) {
     SpinalConfig(

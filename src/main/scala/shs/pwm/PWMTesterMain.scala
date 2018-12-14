@@ -2,7 +2,6 @@ package shs.pwm
 
 import spinal.core._
 
-//noinspection LanguageFeature
 object PWMTesterMain {
   def main(args: Array[String]) {
     SpinalConfig(

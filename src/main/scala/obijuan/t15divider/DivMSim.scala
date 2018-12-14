@@ -4,7 +4,6 @@ import spinal.core._
 import spinal.core.sim._
 import spinal.sim._
 
-//noinspection TypeAnnotation,FieldFromDelayedInit
 object DivMSim {
 
   def main(args: Array[String]) {

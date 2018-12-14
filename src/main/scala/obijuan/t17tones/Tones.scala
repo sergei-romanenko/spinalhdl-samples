@@ -4,7 +4,6 @@ import spinal.core._
 import spinal.lib._
 import obijuan.lib.Freq
 
-//noinspection TypeAnnotation,FieldFromDelayedInit,LanguageFeature
 case class Tones
 (
   F0: Long = Freq.F_1KHz,

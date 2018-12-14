@@ -2,7 +2,6 @@ package obijuan.lib
 
 import spinal.core._
 
-//noinspection TypeAnnotation,LanguageFeature
 case class Divider(M: Long = Freq.T_100ms) extends Component {
   val io = new Bundle {
     val tick = out Bool

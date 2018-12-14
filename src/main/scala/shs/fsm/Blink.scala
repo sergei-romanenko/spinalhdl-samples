@@ -4,7 +4,6 @@ import spinal.core._
 import spinal.lib._
 import spinal.lib.fsm._
 
-//noinspection TypeAnnotation,LanguageFeature,ForwardReference
 case class Blink
 (
   N: Int = 8, frequency: HertzNumber = 1 Hz
@@ -23,7 +22,6 @@ case class Blink
   }
 }
 
-//noinspection LanguageFeature
 object BlinkMain {
   def main(args: Array[String]) {
     SpinalConfig(
@@ -37,7 +35,6 @@ object BlinkMain {
 import spinal.sim._
 import spinal.core.sim._
 
-//noinspection FieldFromDelayedInit,LanguageFeature
 object BlinkSim {
   val spinalConfig = SpinalConfig(
     defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),

@@ -2,7 +2,6 @@ package shs.ram
 
 import spinal.core._
 
-//noinspection TypeAnnotation,LanguageFeature,FieldFromDelayedInit
 case class SumTester(size: Int = 10) extends Component {
   val io = new Bundle {
     val leds = out UInt(width = 8 bits)
@@ -17,7 +16,6 @@ case class SumTester(size: Int = 10) extends Component {
   }
 }
 
-//noinspection LanguageFeature
 object SumMain {
   def main(args: Array[String]) {
     SpinalConfig(

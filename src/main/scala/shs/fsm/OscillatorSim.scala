@@ -4,7 +4,6 @@ import spinal.core._
 import spinal.sim._
 import spinal.core.sim._
 
-//noinspection FieldFromDelayedInit,LanguageFeature
 object OscillatorSim {
   val spinalConfig = SpinalConfig(
     defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),

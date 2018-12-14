@@ -3,7 +3,6 @@ package obijuan.t15divider
 import spinal.core._
 import spinal.lib._
 
-//noinspection TypeAnnotation
 case class DivM(M: Long = 12000000) extends Component {
   val io = new Bundle {
     val tick = out Bool

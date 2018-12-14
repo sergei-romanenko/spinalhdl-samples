@@ -3,7 +3,6 @@ package obijuan.t26rom
 import obijuan.lib._
 import spinal.core._
 
-//noinspection TypeAnnotation,FieldFromDelayedInit,LanguageFeature
 case class RomFile4x4Tester
 (
   DELAY: Long = Freq.T_500ms,

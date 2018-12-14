@@ -3,7 +3,6 @@ package obijuan.t26rom
 import obijuan.lib._
 import spinal.core._
 
-//noinspection TypeAnnotation,LanguageFeature
 case class MemRom4x4(romfile: String = "rom1.list") extends Component {
   val io = new Bundle {
     val addr = in UInt (4 bits)

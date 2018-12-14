@@ -4,7 +4,6 @@ import spinal.core._
 import spinal.lib._
 import spinal.lib.fsm._
 
-//noinspection TypeAnnotation,LanguageFeature,ForwardReference
 case class Sum(width: Int = 16, size: Int = 1024) extends Component {
   val io = new Bundle {
     val ready = out Bool

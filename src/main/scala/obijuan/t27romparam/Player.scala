@@ -4,7 +4,6 @@ import spinal.core._
 import obijuan.lib._
 import obijuan.t26rom._
 
-//noinspection TypeAnnotation,LanguageFeature,FieldFromDelayedInit
 case class Player
 (
   dur: Int = Freq.T_200ms,
