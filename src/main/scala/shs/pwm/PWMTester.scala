@@ -36,8 +36,7 @@ case class PWMTester(frequency: HertzNumber = 1 MHz) extends Component {
     duty := duty - step
   }
 
-
-  val pwm = PWM(max = max, frequency = frequency)
+  val pwm = PWM(max, frequency)
   pwm.io.duty := duty
 
   io.leds := 0

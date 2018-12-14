@@ -13,7 +13,7 @@ case class Blink
     val leds = out UInt (N bits)
   }
 
-  val slowArea = new SlowArea(frequency = 1 Hz) {
+  val slowArea = new SlowArea(frequency) {
     val tick = RegInit(True)
 
     tick := ~tick

@@ -29,7 +29,7 @@ case class Debouncer() extends Component {
   val idle = Bool
   idle := (state === sync_1)
 
-  io.trans_dn := ~idle & finished & state
+  io.trans_dn := ~idle & finished & ~state
   io.trans_up := ~idle & finished & state
 
   when(idle) {

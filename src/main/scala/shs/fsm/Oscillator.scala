@@ -6,8 +6,8 @@ import spinal.lib.fsm._
 
 //noinspection TypeAnnotation,LanguageFeature,ForwardReference
 case class Oscillator(N: Int, frequency: HertzNumber) extends Component {
+  val width = log2Up(N)
   val io = new Bundle {
-    val width = log2Up(N)
     val ampl = out UInt (width bits)
   }
 
@@ -19,22 +19,20 @@ case class Oscillator(N: Int, frequency: HertzNumber) extends Component {
 
       val UP: State = new State with EntryPoint {
         whenIsActive {
+          counter := counter + 1
           when(counter === N - 1) {
             counter := counter - 1
             goto(DOWN)
-          } otherwise {
-            counter := counter + 1
           }
         }
       }
 
       val DOWN: State = new State {
         whenIsActive {
+          counter := counter - 1
           when(counter === 0) {
             counter := counter + 1
             goto(UP)
-          } otherwise {
-            counter := counter - 1
           }
         }
       }
