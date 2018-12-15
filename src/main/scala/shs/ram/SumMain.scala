@@ -7,7 +7,7 @@ case class SumTester(size: Int = 10) extends Component {
     val leds = out UInt(width = 8 bits)
   }
 
-  val s1 = Sum(width = 8, size = size)
+  val s1 = SumRAM(width = 8, size = size)
 
   when(s1.io.ready) {
     io.leds := s1.io.result

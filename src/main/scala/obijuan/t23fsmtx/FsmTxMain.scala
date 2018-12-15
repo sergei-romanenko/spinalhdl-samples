@@ -1,13 +1,13 @@
-package shs.pwm
+package obijuan.t23fsmtx
 
 import spinal.core._
 
-object PWMTesterMain {
+object FsmTxMain {
   def main(args: Array[String]) {
     SpinalConfig(
       defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
       defaultClockDomainFrequency = FixedFrequency(12 MHz),
-      targetDirectory = "rtl/shs/pwm"
-    ).generateVerilog(PWMTester(100 kHz))
+      targetDirectory = "rtl/obijuan/t23e1"
+    ).generateVerilog(FsmTx())
   }
 }

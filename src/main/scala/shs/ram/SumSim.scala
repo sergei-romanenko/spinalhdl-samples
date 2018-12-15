@@ -11,11 +11,11 @@ object SumSim {
 
   def main(args: Array[String]) {
     val compiled = SimConfig.withConfig(spinalConfig)
-      .withWave.compile(Sum(width = 8, size = 5))
+      .withWave.compile(SumRAM(width = 8, size = 5))
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
 
-      Suspendable.repeat (100) {
+      Suspendable.repeat (20) {
         dut.clockDomain.waitSampling()
       }
     }
