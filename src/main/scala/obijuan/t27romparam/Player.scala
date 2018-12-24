@@ -22,7 +22,7 @@ case class Player
     wordType = UInt(width = dw bits), wordCount = contents.length)
   rom.initialContent = contents
 
-  val div = Divider(dur)
+  val div = DividerP1(dur)
   val tick = Bool
   tick := div.io.tick
 

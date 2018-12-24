@@ -13,7 +13,7 @@ case class FsmTx
     val tx = out Bool
   }
 
-  val byte: Bits = B(CHAR.toByte, 8 bits)
+  val charByte: Bits = B(CHAR.toByte, 8 bits)
 
   val start = RegInit(False)
   start := io.dtr
@@ -41,7 +41,7 @@ case class FsmTx
   when(ini) {
     shifter := B"b11_1111_1111"
   } elsewhen load {
-    shifter := B(CHAR.toByte, 8 bits) ## B"2'b01"
+    shifter := charByte ## B"2'b01"
   } elsewhen baud_tick {
     shifter := U"1'b1" ## shifter(9 downto 1)
   }

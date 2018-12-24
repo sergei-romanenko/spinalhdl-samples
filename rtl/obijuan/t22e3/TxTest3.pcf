@@ -1,0 +1,12 @@
+set_io -nowarn clk J3
+
+# ------------ FTDI 1 ---------------------------------------------------------
+# UART
+set_io -nowarn io_tx  B12  # output
+set_io -nowarn io_rx  B10  # input
+set_io -nowarn io_rts B13  # input
+set_io -nowarn io_dtr A16  # input
+
+#set_io -nowarn dcd B15  # output
+#set_io -nowarn dsr B14  # output
+#set_io -nowarn cts A15  # output

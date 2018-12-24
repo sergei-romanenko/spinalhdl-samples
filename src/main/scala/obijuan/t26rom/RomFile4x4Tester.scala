@@ -13,7 +13,7 @@ case class RomFile4x4Tester
     val leds = out UInt (8 bits)
   }
 
-  val div = Divider(M = DELAY)
+  val div = DividerP1(M = DELAY)
   val tick = Bool
   tick := div.io.tick
 
