@@ -6,33 +6,20 @@ package shs.sqrt
 import spinal.core._
 import spinal.lib._
 
-case class SqrtGenerics(r_width: Int = 16) {
-  val v_width = r_width * 2
+case class SqrtU(resultWidth: Int) extends Component {
+  val valueWidth = 2 * resultWidth
 
-  def valueType = UInt(v_width bits)
-  def resultType = UInt(r_width bits)
-}
+  def valueType = UInt(valueWidth bits)
 
-case class SqrtTask(g: SqrtGenerics) extends Bundle {
-  val value = g.valueType
-}
+  def resultType = UInt(resultWidth bits)
 
-case class SqrtResult(g: SqrtGenerics) extends Bundle {
-  val value = g.valueType
-  val result = g.resultType
-}
-
-
-case class Sqrt(g: SqrtGenerics) extends Component {
   val io = new Bundle {
-    val cmd = slave Stream SqrtTask(g)
-    val rsp = master Stream SqrtResult(g)
+    val cmd = slave Stream valueType
+    val rsp = master Stream resultType
   }
 
-  import g._
-
   // Keep track of which bit I'm working on.
-  val lw = log2Up(r_width)
+  val lw = log2Up(resultWidth)
   val l = UInt(lw bits)
   val i = Reg(UInt(lw + 1 bits))
   l := (i - 1) (0 until lw)
@@ -58,12 +45,11 @@ case class Sqrt(g: SqrtGenerics) extends Component {
     io.cmd.ready := True
     acc := 0
     acc2 := 0
-    i := U(r_width)
+    i := U(resultWidth)
   }
 
   //Apply default assignement
-  io.rsp.value := io.cmd.value
-  io.rsp.result := acc
+  io.rsp.payload := acc
   io.cmd.ready := False
   io.rsp.valid := False
 
@@ -71,7 +57,7 @@ case class Sqrt(g: SqrtGenerics) extends Component {
     //Is the sqrt iteration done?
     when(i =/= 0) {
       i := i - 1
-      when(guess2 <= io.cmd.value) {
+      when(guess2 <= io.cmd.payload) {
         acc := guess
         acc2 := guess2
       }
@@ -89,4 +75,5 @@ case class Sqrt(g: SqrtGenerics) extends Component {
     ini := False
     clear()
   }
+
 }
