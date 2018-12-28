@@ -2,7 +2,7 @@ package shs.sqrt
 
 import spinal.core._
 
-object SqrtMain {
+object SqrtI1Main {
 
   val g = SqrtGenerics(16)
 
@@ -11,6 +11,6 @@ object SqrtMain {
       defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
       defaultClockDomainFrequency = FixedFrequency(12 MHz),
       targetDirectory = "rtl/shs/sqrt"
-    ).generateVerilog(Sqrt(g))
+    ).generateVerilog(SqrtI1(g))
   }
 }

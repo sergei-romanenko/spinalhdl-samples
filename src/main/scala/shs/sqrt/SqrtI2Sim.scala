@@ -3,14 +3,14 @@ package shs.sqrt
 import spinal.core._
 import spinal.core.sim._
 
-object SqrtUSim {
+object SqrtI2Sim {
   val spinalConfig = SpinalConfig(
     defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
     defaultClockDomainFrequency = FixedFrequency(12 MHz))
 
   def main(args: Array[String]) {
     val compiled = SimConfig.withConfig(spinalConfig)
-      .withWave.compile(SqrtU(4))
+      .withWave.compile(SqrtI2(4))
     compiled.doSim { dut =>
       val inputs = Vector(1, 2, 3, 4, 25, 27, 254, 255)
       dut.clockDomain.forkStimulus(period = 10)

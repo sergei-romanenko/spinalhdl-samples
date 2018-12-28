@@ -4,7 +4,7 @@ import spinal.core._
 import spinal.sim._
 import spinal.core.sim._
 
-object SqrtSim {
+object SqrtI1Sim {
   val spinalConfig = SpinalConfig(
     defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
     defaultClockDomainFrequency = FixedFrequency(12 MHz))
@@ -13,9 +13,9 @@ object SqrtSim {
 
   def main(args: Array[String]) {
     val compiled = SimConfig.withConfig(spinalConfig)
-      .withWave.compile(Sqrt(g))
+      .withWave.compile(SqrtI1(g))
     compiled.doSim { dut =>
-      val inputs = Vector(1, 2, 3, 4, 25, 27, 254, 255)
+      val inputs = Seq(0, 1, 2, 3, 4, 25, 27, 254, 255)
       dut.clockDomain.forkStimulus(period = 10)
 
       sleep(cycles = 10)
