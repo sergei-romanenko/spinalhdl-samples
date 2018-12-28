@@ -1,6 +1,7 @@
 package shs.sqrt
 
 import spinal.core._
+import spinal.sim._
 import spinal.core.sim._
 
 object SqrtI2Sim {
@@ -12,13 +13,11 @@ object SqrtI2Sim {
     val compiled = SimConfig.withConfig(spinalConfig)
       .withWave.compile(SqrtI2(4))
     compiled.doSim { dut =>
-      val inputs = Vector(1, 2, 3, 4, 25, 27, 254, 255)
+      val inputs = Seq(0, 1, 2, 3, 4, 25, 27, 254, 255)
       dut.clockDomain.forkStimulus(period = 10)
 
       sleep(cycles = 10)
-      var idx = 0
-      while (idx < inputs.length) {
-        val v = inputs(idx)
+      inputs.suspendable.foreach { v =>
         sleep(cycles = 10)
         dut.io.cmd.payload #= v
         dut.io.cmd.valid #= true
@@ -33,7 +32,6 @@ object SqrtI2Sim {
         dut.io.cmd.valid #= false
         dut.io.rsp.ready #= false
         dut.clockDomain.waitSampling()
-        idx += 1
       }
     }
   }

@@ -6,7 +6,7 @@ package shs.sqrt
 import spinal.core._
 import spinal.lib._
 
-case class Sqrt2(resultWidth: Int) extends Component {
+case class SqrtI2(resultWidth: Int) extends Component {
   val valueWidth = 2 * resultWidth
 
   def valueType = UInt(valueWidth bits)

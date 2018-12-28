@@ -16,7 +16,7 @@ case class SqrtPR(r_width: Int = 16) extends Component {
     val rsp_result = out(resultType)
   }
 
-  def loop(i: Int, value: UInt, acc: UInt, acc2: UInt): Unit = {
+  def build(i: Int, value: UInt, acc: UInt, acc2: UInt): Unit = {
     if (i == 0) {
       io.rsp_value := value
       io.rsp_result := acc
@@ -47,8 +47,8 @@ case class SqrtPR(r_width: Int = 16) extends Component {
       next_acc2 := acc2
     }
 
-    loop(i - 1, next_value, next_acc, next_acc2)
+    build(i - 1, next_value, next_acc, next_acc2)
   }
 
-  loop(r_width, io.value, U(0, r_width bits), U(0, v_width bits))
+  build(r_width, io.value, U(0, r_width bits), U(0, v_width bits))
 }

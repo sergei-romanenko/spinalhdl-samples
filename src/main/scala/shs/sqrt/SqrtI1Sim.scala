@@ -19,9 +19,7 @@ object SqrtI1Sim {
       dut.clockDomain.forkStimulus(period = 10)
 
       sleep(cycles = 10)
-      var idx = 0
-      while (idx < inputs.length) {
-        val value = inputs(idx)
+      inputs.suspendable.foreach { value =>
         sleep(cycles = 10)
         dut.io.cmd.value #= value
         dut.io.cmd.valid #= true
@@ -37,7 +35,6 @@ object SqrtI1Sim {
         dut.io.cmd.valid #= false
         dut.io.rsp.ready #= false
         dut.clockDomain.waitSampling()
-        idx += 1
       }
     }
   }
