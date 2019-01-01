@@ -9,6 +9,6 @@ object MinMain {
       defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
       defaultClockDomainFrequency = FixedFrequency(12 MHz),
       targetDirectory = "rtl/shs/min"
-    ).generateVerilog(Min(16, 8))
+    ).generateVerilog(Min(16, 5))
   }
 }
