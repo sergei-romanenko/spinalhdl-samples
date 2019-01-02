@@ -35,7 +35,7 @@ object FsmTxSim {
 
       sleep(cycles = FRAME_WAIT * 4)
 
-      Suspendable.repeat(1000) {
+      for (k <- 0 until 1000) {
         dut.clockDomain.waitSampling()
       }
 

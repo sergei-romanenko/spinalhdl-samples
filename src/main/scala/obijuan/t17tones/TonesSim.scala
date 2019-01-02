@@ -13,7 +13,7 @@ object TonesSim {
       Tones(F0 = 3, F1 = 5, F2 = 7, F3 = 10))
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
-      Suspendable.repeat(50) {
+      for (k <- 0 until 50) {
         dut.clockDomain.waitSampling()
       }
     }

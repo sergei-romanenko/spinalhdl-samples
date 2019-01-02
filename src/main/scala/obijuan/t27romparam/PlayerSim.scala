@@ -13,7 +13,7 @@ object PlayerSim {
       Player(dur = 4, romfile = "src/main/scala/obijuan/t27romparam/imperial.list"))
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
-      Suspendable.repeat(200) {
+      for (k <- 0 until 200) {
         dut.clockDomain.waitSampling()
       }
     }

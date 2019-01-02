@@ -15,7 +15,7 @@ object SumSim {
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
 
-      Suspendable.repeat (20) {
+      for (k <- 0 until 20) {
         dut.clockDomain.waitSampling()
       }
     }

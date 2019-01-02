@@ -13,7 +13,7 @@ object MemRom4x4TesterSim {
       MemRom4x4Tester(DELAY = 2, ROMFILE = "src/main/scala/obijuan/t26rom/rom1.list"))
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
-      Suspendable.repeat(50) {
+      for (k <- 0 until 50) {
         dut.clockDomain.waitSampling()
       }
     }

@@ -17,7 +17,7 @@ object SqrtI2Sim {
       dut.clockDomain.forkStimulus(period = 10)
 
       sleep(cycles = 10)
-      inputs.suspendable.foreach { v =>
+      for (v <- inputs) {
         sleep(cycles = 10)
         dut.io.cmd.payload #= v
         dut.io.cmd.valid #= true

@@ -13,7 +13,7 @@ object CounterSim {
 
       var cnt = 0
 
-      Suspendable.repeat (100) {
+      for (k <- 0 until 100) {
         dut.clockDomain.waitSampling()
         val high = cnt >> (dut.width - dut.nleds)
         assert(dut.io.leds.toInt == high)

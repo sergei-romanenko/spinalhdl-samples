@@ -16,7 +16,7 @@ object SqrtPVSim {
       val inputs = Seq(1, 2, 3, 4, 25, 27, 224, 225, 0, 0, 0, 0, 0, 0, 0)
       dut.clockDomain.forkStimulus(period = 10)
 
-      inputs.suspendable.foreach { value =>
+      for (value <- inputs) {
         dut.io.value #= value
         dut.clockDomain.waitSampling()
         val v = dut.io.rsp_value.toLong

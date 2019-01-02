@@ -17,7 +17,7 @@ object DivMSim {
 
       var cnt = 0
 
-      Suspendable.repeat (50) {
+      for (k <- 0 until 50) {
         dut.clockDomain.waitSampling()
         //println(s"cnt=${cnt},tick = ${dut.io.tick.toBoolean}")
         val high = cnt >> 2

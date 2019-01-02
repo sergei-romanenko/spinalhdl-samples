@@ -46,7 +46,7 @@ object BlinkSim {
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
 
-      Suspendable.repeat (100) {
+      for (k <- 0 until 100) {
         dut.clockDomain.waitSampling()
       }
     }

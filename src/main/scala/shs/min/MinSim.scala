@@ -21,12 +21,12 @@ object MinSim {
       dut.io.cmd.valid #= false
       dut.clockDomain.waitSampling()
 
-      inputs.suspendable.foreach { value =>
+      for (value <- inputs) {
         println(s"$value")
         for (i <- value.indices)
           dut.io.cmd.payload(i) #= value(i)
         dut.io.cmd.valid #= true
-        Suspendable.repeat(times = 6) {
+        for(i <- 0 until 6) {
           dut.clockDomain.waitSampling()
           val valid = dut.io.rsp.valid.toBigInt
           val r = dut.io.rsp.payload.toInt
