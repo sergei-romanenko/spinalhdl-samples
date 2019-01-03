@@ -5,16 +5,20 @@ import spinal.lib._
 
 import shs.lib._
 
-case class PWMTester(frequency: HertzNumber = 100 kHz) extends Component {
+case class PWMTester
+(
+  frequency: HertzNumber = 100 kHz,
+  limit: BigInt = 255,
+  step: BigInt = 32
+) extends Component {
+
   val io = new Bundle {
     val switch_up = in Bool
     val switch_dn = in Bool
     val leds = out UInt (8 bits)
   }
 
-  val max = 255
-  val step = 32
-  val width = log2Up(max + 1)
+  def valueType = UInt(limit.bitLength bits)
 
   val s_up, s_dn = Bool
 
@@ -25,9 +29,9 @@ case class PWMTester(frequency: HertzNumber = 100 kHz) extends Component {
   d2.io.switch_input := io.switch_dn
   s_dn := d2.io.trans_up
 
-  val duty = RegInit(U(0, width bits))
+  val duty = Reg(valueType) init 0
 
-  when(s_up && duty <= max - step) {
+  when(s_up && duty <= limit - step) {
     duty := duty + step
   }
 
@@ -35,7 +39,7 @@ case class PWMTester(frequency: HertzNumber = 100 kHz) extends Component {
     duty := duty - step
   }
 
-  val pwm = PWM(max, frequency)
+  val pwm = PWM(limit, frequency)
   pwm.io.duty := duty
 
   io.leds := 0

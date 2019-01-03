@@ -21,9 +21,9 @@ case class SqrtPV(r_width: Int) extends Component {
     val rsp_result = out(resultType)
   }
 
-  val value = Vec(RegInit(U(0, v_width bits)), r_width + 1)
-  val acc = Vec(RegInit(U(0, r_width bits)), r_width + 1)
-  val acc2 = Vec(RegInit(U(0, v_width bits)), r_width + 1)
+  val value = Vec(Reg(valueType) init 0, r_width + 1)
+  val acc = Vec(Reg(resultType) init 0, r_width + 1)
+  val acc2 = Vec(Reg(valueType) init 0, r_width + 1)
 
   value(0) := io.value
   acc(0) := 0
@@ -42,7 +42,7 @@ case class SqrtPV(r_width: Int) extends Component {
     guess2 := acc2(i - 1) + U(b2) + ((acc(i - 1) << l) << 1)
 
     value(i) := value(i - 1)
-    when( guess2 <= value(i - 1) ) {
+    when(guess2 <= value(i - 1)) {
       acc(i) := guess
       acc2(i) := guess2
     } otherwise {

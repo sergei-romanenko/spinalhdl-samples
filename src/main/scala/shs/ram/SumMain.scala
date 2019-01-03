@@ -9,7 +9,7 @@ case class SumTester(size: Int = 10) extends Component {
 
   val s1 = SumRAM(width = 8, size = size)
 
-  when(s1.io.ready) {
+  when(s1.io.valid) {
     io.leds := s1.io.result
   } otherwise {
     io.leds := U(8 bits, default -> true)

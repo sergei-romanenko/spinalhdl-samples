@@ -13,24 +13,14 @@ case class Min(w: Int, n: Int) extends Component {
 
   def build(d: Int, es: Vector[UInt]): UInt = {
     if (d == 0) {
-      val r0 = Reg(valueType) init 0
-      r0 := es.head
-      r0
+      es.head
     } else if (es.length == 1) {
-      val r0 = Reg(valueType) init 0
-      r0 := build(d - 1, es)
-      r0
+      RegNext(build(d - 1, es)) init 0
     } else {
       val l = es.length / 2
       val r1 = build(d - 1, es.take(l))
       val r2 = build(d - 1, es.drop(l))
-      val r = Reg(valueType) init 0
-      when(r1 <= r2) {
-        r := r1
-      } otherwise {
-        r := r2
-      }
-      r
+      RegNext((r1 <= r2) ? r1 | r2) init 0
     }
   }
 

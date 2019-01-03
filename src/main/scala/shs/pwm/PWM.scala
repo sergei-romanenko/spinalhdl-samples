@@ -3,16 +3,17 @@ package shs.pwm
 import spinal.core._
 import spinal.lib._
 
-case class PWM(max: Int, frequency: HertzNumber) extends Component {
-  val width = log2Up(max + 1)
+case class PWM(limit: BigInt, frequency: HertzNumber) extends Component {
+  def valueType = UInt(limit.bitLength bits)
+
   val io = new Bundle {
-    val duty = in UInt (width bits)
+    val duty = in(valueType)
     val pwm_pin = out Bool
   }
 
   val slowArea = new SlowArea(frequency) {
     val on = RegInit(True)
-    val cnt = RegInit(U(0, width bits))
+    val cnt = Reg(valueType) init 0
 
     cnt := cnt + 1
     io.pwm_pin := (cnt < io.duty)

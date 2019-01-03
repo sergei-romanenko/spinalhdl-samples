@@ -1,4 +1,4 @@
-package shs.fsm
+package shs.blink
 
 import spinal.core._
 import spinal.lib._
@@ -27,7 +27,7 @@ object BlinkMain {
     SpinalConfig(
       defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
       defaultClockDomainFrequency = FixedFrequency(12 MHz),
-      targetDirectory = "rtl/shs/fsm-blink"
+      targetDirectory = "rtl/shs/blink"
     ).generateVerilog(Blink(8, 2 Hz))
   }
 }

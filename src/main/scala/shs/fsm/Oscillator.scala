@@ -18,23 +18,21 @@ case class Oscillator(N: Int, frequency: HertzNumber) extends Component {
 
       val counter = RegInit(U(0, width bits))
 
-      FORTH
-        .whenIsActive {
-          counter := counter + 1
-          when(counter === N - 1) {
-            counter := counter - 1
-            goto(BACK)
-          }
-        }
-
-      BACK
-        .whenIsActive {
+      FORTH.whenIsActive {
+        counter := counter + 1
+        when(counter === N - 1) {
           counter := counter - 1
-          when(counter === 0) {
-            counter := counter + 1
-            goto(FORTH)
-          }
+          goto(BACK)
         }
+      }
+
+      BACK.whenIsActive {
+        counter := counter - 1
+        when(counter === 0) {
+          counter := counter + 1
+          goto(FORTH)
+        }
+      }
     }
 
     io.ampl := fsm.counter
