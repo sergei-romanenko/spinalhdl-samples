@@ -1,4 +1,4 @@
-package shs.sqrt
+package shs.sqrt.multicore
 
 // This example is based on
 // http://iverilog.wikia.com/wiki/Simulation
@@ -7,7 +7,7 @@ import spinal.core._
 import spinal.lib._
 
 
-case class SqrtI1(g: SqrtGenerics) extends Component {
+case class Sqrt(g: SqrtGenerics) extends Component {
   val io = new Bundle {
     val cmd = slave Stream SqrtTask(g)
     val rsp = master Stream SqrtResult(g)

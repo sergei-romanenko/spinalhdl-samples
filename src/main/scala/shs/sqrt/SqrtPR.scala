@@ -34,20 +34,12 @@ case class SqrtPR(r_width: Int = 16) extends Component {
     val guess2 = valueType
     guess2 := acc2 + U(b2) + ((acc << l) << 1)
 
-    val next_value = Reg(valueType) init 0
-    val next_acc = Reg(resultType) init 0
-    val next_acc2 = Reg(valueType) init 0
+    val hit = guess2 <= value
 
-    next_value := value
-    when(guess2 <= value) {
-      next_acc := guess
-      next_acc2 := guess2
-    } otherwise {
-      next_acc := acc
-      next_acc2 := acc2
-    }
-
-    build(i - 1, next_value, next_acc, next_acc2)
+    build(i - 1,
+      RegNext(value) init 0,
+      RegNext(hit ? guess | acc) init 0,
+      RegNext(hit ? guess2 | acc2) init 0)
   }
 
   build(r_width, io.value, U(0, r_width bits), U(0, v_width bits))
