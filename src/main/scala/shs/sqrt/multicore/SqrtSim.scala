@@ -9,33 +9,50 @@ object SqrtSim {
     defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
     defaultClockDomainFrequency = FixedFrequency(12 MHz))
 
-  val g = SqrtGenerics(16)
+  val g = SqrtGenerics(8)
 
   def main(args: Array[String]) {
-    val compiled = SimConfig.withConfig(spinalConfig)
-      .withWave.compile(Sqrt(g))
-    compiled.doSim { dut =>
-      val inputs = Seq(0, 1, 2, 3, 4, 25, 27, 254, 255)
+    val compiled = SimConfig.withConfig(spinalConfig).withWave
+      .compile(SqrtMultiCore(g, coreCount = 3))
+    compiled.doSimUntilVoid { dut =>
+
       dut.clockDomain.forkStimulus(period = 10)
+      SimTimeout(1000 * 10)
 
-      sleep(cycles = 10)
-      for (value <- inputs) {
-        sleep(cycles = 10)
-        dut.io.cmd.value #= value
-        dut.io.cmd.valid #= true
-        waitUntil(dut.io.rsp.valid.toBoolean)
-
-        dut.io.rsp.ready #= true
-        val v = dut.io.rsp.value.toLong
-        val r = dut.io.rsp.result.toLong
-        println(s"value=$v, result=$r")
-        assert(r * r <= v && (r + 1) * (r + 1) >= v)
+      val pushFork = fork {
+        dut.io.cmd.value #= 0
+        dut.io.cmd.valid #= false
         dut.clockDomain.waitSampling()
 
-        dut.io.cmd.valid #= false
+        while (true) {
+          dut.io.cmd.value.randomize()
+          dut.io.cmd.valid #= true
+          dut.clockDomain.waitSampling()
+          waitUntil(dut.io.cmd.ready.toBoolean)
+          dut.io.cmd.value #= 0
+          dut.io.cmd.valid #= false
+          dut.clockDomain.waitSampling()
+        }
+      }
+
+      val popFork = fork {
         dut.io.rsp.ready #= false
         dut.clockDomain.waitSampling()
+        dut.io.rsp.ready #= true
+        for (i <- 0 until 50) {
+          if(dut.io.rsp.valid.toBoolean) {
+            val v = dut.io.rsp.value.toLong
+            val r = dut.io.rsp.result.toLong
+            println(s"value=$v, result=$r")
+            assert(r * r <= v && (r + 1) * (r + 1) >= v)
+          }
+          dut.clockDomain.waitSampling()
+        }
+        simSuccess()
       }
+
+      popFork.join()
     }
+
   }
 }
