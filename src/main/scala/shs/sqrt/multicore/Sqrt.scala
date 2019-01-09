@@ -45,7 +45,7 @@ case class Sqrt(g: SqrtGenerics) extends Component {
     i := U(r_width)
   }
 
-  //Apply default assignement
+  //Apply default assignment
   io.rsp.value := io.cmd.value
   io.rsp.result := acc
   io.cmd.ready := False

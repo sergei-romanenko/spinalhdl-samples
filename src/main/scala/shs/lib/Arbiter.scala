@@ -1,10 +1,7 @@
-package shs.sqrt.multicore
+package shs.lib
 
 import spinal.core._
 import spinal.lib._
-
-// This class is taken from
-// https://github.com/SpinalHDL/SpinalWorkshop
 
 case class Arbiter[T <: Data](dataType: T, inputsCount: Int) extends Component {
   val io = new Bundle {

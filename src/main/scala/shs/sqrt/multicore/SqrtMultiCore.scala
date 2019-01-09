@@ -2,6 +2,7 @@ package shs.sqrt.multicore
 
 import spinal.core._
 import spinal.lib._
+import shs.lib.{Arbiter, Dispatcher}
 
 case class SqrtMultiCore(g: SqrtGenerics, coreCount: Int)
   extends Component {

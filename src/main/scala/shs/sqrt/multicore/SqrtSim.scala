@@ -20,18 +20,14 @@ object SqrtSim {
       SimTimeout(1000 * 10)
 
       val pushFork = fork {
-        dut.io.cmd.value #= 0
-        dut.io.cmd.valid #= false
-        dut.clockDomain.waitSampling()
-
         while (true) {
+          dut.io.cmd.value #= 0
+          dut.io.cmd.valid #= false
+          dut.clockDomain.waitSampling()
           dut.io.cmd.value.randomize()
           dut.io.cmd.valid #= true
           dut.clockDomain.waitSampling()
           waitUntil(dut.io.cmd.ready.toBoolean)
-          dut.io.cmd.value #= 0
-          dut.io.cmd.valid #= false
-          dut.clockDomain.waitSampling()
         }
       }
 
