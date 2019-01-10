@@ -4,7 +4,7 @@ import spinal.core._
 import spinal.sim._
 import spinal.core.sim._
 
-object OneCoreSim {
+object GCDSim {
   val spinalConfig = SpinalConfig(
     defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
     defaultClockDomainFrequency = FixedFrequency(12 MHz))
