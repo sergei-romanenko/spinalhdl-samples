@@ -2,7 +2,7 @@ package shs.gcd
 
 // A von Neumann algorithm!
 
-object GCDFN {
+object GCDVN {
 
   def gcdRecRem(a: Long, b: Long): Long = {
     if (b == 0) a else gcdRecRem(b, a % b)
@@ -48,7 +48,7 @@ object GCDFNTest {
       (5, 250, 5))
 
     for ((a, b, c) <- inputs) {
-      val r = GCDFN.gcdRec(a, b)
+      val r = GCDVN.gcdRec(a, b)
       println(s"a=$a, b=$b, r=$r")
       assert(c == r)
     }

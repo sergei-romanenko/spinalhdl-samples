@@ -4,6 +4,8 @@ import spinal.core._
 import spinal.lib._
 
 case class Min(w: Int, n: Int) extends Component {
+  require(n > 0, "Input width can't be == 0")
+
   def valueType = UInt(w bits)
 
   val io = new Bundle {
@@ -15,16 +17,15 @@ case class Min(w: Int, n: Int) extends Component {
     if (d == 0) {
       es.head
     } else if (es.length == 1) {
-      RegNext(build(d - 1, es)) init 0
+      build(d - 1, es)
     } else {
       val l = es.length / 2
       val r1 = build(d - 1, es.take(l))
       val r2 = build(d - 1, es.drop(l))
-      RegNext((r1 <= r2) ? r1 | r2) init 0
+      (r1 <= r2) ? r1 | r2
     }
   }
 
-  require(n > 0, "Input width == 0")
   val depth = log2Up(n)
 
   io.rsp.payload := build(depth, io.cmd.payload.toVector)

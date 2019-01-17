@@ -1,20 +1,24 @@
-package shs.min
+package shs.btsort
 
 import shs.sqrt.SqrtPR
 import spinal.core._
 import spinal.core.sim._
 import spinal.sim._
 
-object MinSim {
+object BitonicSortSim {
   val spinalConfig = SpinalConfig(
     defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
     defaultClockDomainFrequency = FixedFrequency(12 MHz))
 
   def main(args: Array[String]) {
     val compiled = SimConfig.withConfig(spinalConfig)
-      .withWave.compile(Min(16, 5))
+      .withWave.compile(BitonicSort(width = 8, size = 8))
     compiled.doSim { dut =>
-      val inputs = Seq(Vector(40, 20, 10, 50, 60), Vector(10, 20, 30, 40, 50))
+      val inputs = Seq(
+        Vector(40, 20, 70, 30, 10, 80, 50, 60),
+        Vector(10, 20, 30, 40, 50, 60, 70, 80),
+        Vector(80, 70, 60, 50, 40, 30, 20, 10),
+        Vector(40, 40, 70, 60, 10, 70, 50, 60))
 
       for (value <- inputs) {
         println(s"$value")
@@ -23,7 +27,7 @@ object MinSim {
         dut.io.cmd.valid #= true
         sleep(cycles = 10)
         val valid = dut.io.rsp.valid.toBigInt
-        val result = dut.io.rsp.payload.toInt
+        val result = dut.io.rsp.payload.toVector.map(_.toInt)
         println(s"valid=$valid, result=$result")
       }
     }

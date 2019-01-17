@@ -46,7 +46,7 @@ object GCDMultiCoreSim {
             val b = dut.io.rsp.b.toLong
             val r = dut.io.rsp.r.toLong
             println(s"a=$a, b=$b, r=$r")
-            assert(GCDFN.gcdRec(a, b) == r)
+            assert(GCDVN.gcdRec(a, b) == r)
             dut.io.cmd.ready #= true
             dut.clockDomain.waitSampling()
           }
