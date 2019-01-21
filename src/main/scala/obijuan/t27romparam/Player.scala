@@ -7,7 +7,7 @@ import obijuan.t26rom._
 case class Player
 (
   dur: Int = Freq.T_200ms,
-  romfile: String = "imperial.list",
+  romfile: String = "imperial.mem",
   dw: Int = 16
 ) extends Component {
 

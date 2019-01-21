@@ -10,7 +10,7 @@ object MemRom4x4TesterSim {
       .withConfig(SpinalConfig(
         defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT)))
       .withWave.compile(
-      MemRom4x4Tester(DELAY = 2, ROMFILE = "src/main/scala/obijuan/t26rom/rom1.list"))
+      MemRom4x4Tester(DELAY = 2, ROMFILE = "src/main/scala/obijuan/t26rom/rom1.mem"))
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
       for (k <- 0 until 50) {

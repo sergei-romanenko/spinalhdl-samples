@@ -8,7 +8,7 @@ object PlayerMain {
       defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
       targetDirectory = "rtl/obijuan/t27romparam"
     ).generateVerilog(Player(
-      romfile = "src/main/scala/obijuan/t27romparam/imperial.list"))
+      romfile = "src/main/scala/obijuan/t27romparam/imperial.mem"))
       .printPruned()
   }
 }

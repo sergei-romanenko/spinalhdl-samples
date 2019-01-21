@@ -10,7 +10,7 @@ object PlayerSim {
       .withConfig(SpinalConfig(
         defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT)))
       .withWave.compile(
-      Player(dur = 4, romfile = "src/main/scala/obijuan/t27romparam/imperial.list"))
+      Player(dur = 4, romfile = "src/main/scala/obijuan/t27romparam/imperial.mem"))
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
       for (k <- 0 until 200) {

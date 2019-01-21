@@ -1,4 +1,4 @@
-// File: rom1.list
+// File: rom1.mem
 // Each line corresponds to a position in the memory.
      // This is a comment.
 // ROM1: contains the (hexadecimal) numbers from 0 to 15.

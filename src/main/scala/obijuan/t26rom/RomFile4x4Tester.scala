@@ -6,7 +6,7 @@ import spinal.core._
 case class RomFile4x4Tester
 (
   DELAY: Long = Freq.T_500ms,
-  ROMFILE: String = "rom1.list"
+  ROMFILE: String = "rom1.mem"
 ) extends Component {
 
   val io = new Bundle {

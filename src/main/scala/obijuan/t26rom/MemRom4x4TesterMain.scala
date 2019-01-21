@@ -8,7 +8,7 @@ object MemRom4x4TesterMain {
       defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
       targetDirectory = "rtl/obijuan/t26e3mem"
     ).generateVerilog(MemRom4x4Tester(
-      ROMFILE = "src/main/scala/obijuan/t26rom/rom1.list"))
+      ROMFILE = "src/main/scala/obijuan/t26rom/rom1.mem"))
       .printPruned()
   }
 }
