@@ -9,8 +9,8 @@ case class BitonicSort(width: Int = 8, size: Int = 16) extends Component {
   def dataType = UInt(width bits)
 
   val io = new Bundle {
-    val cmd = slave Flow Vec(dataType, size)
-    val rsp = master Flow Vec(dataType, size)
+    val values = in Vec(dataType, size)
+    val results = out Vec(dataType, size)
   }
 
   def swap(up: Boolean, d1: UInt, d2: UInt, q1: UInt, q2: UInt): Unit = {
@@ -53,6 +53,5 @@ case class BitonicSort(width: Int = 8, size: Int = 16) extends Component {
     merge(up, t, q)
   }
 
-  io.rsp.valid := io.cmd.valid
-  sort(up = true, d = io.cmd.payload.toVector, q = io.rsp.payload.toVector)
+  sort(up = true, d = io.values.toVector, q = io.results.toVector)
 }

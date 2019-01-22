@@ -11,19 +11,23 @@ SpinalHDL is an open source high-level hardware description language. It can be 
 
 ### src/main/scala/obijuan/
 
-A number of expamples from the tutorial by Juan Gonzalez-Gomez
+A number of expamples from the tutorial by Juan Gonzalez-Gomez (Obijuan)
 
 > Diseño Digital para FPGAs, con herramientas libres  
 > (Digital Design for FPGAs, with free tools)  
 > <https://github.com/Obijuan/open-fpga-verilog-tutorial/wiki>
 
-(rewritten from Verilog to SpinalHDL) and tested with
+rewritten from Verilog to SpinalHDL and tested with
 [iCE40-HX8K Breakout Board - Lattice
 Semiconductor](http://www.latticesemi.com/Products/DevelopmentBoardsAndKits/iCE40HX8KBreakoutBoard.aspx).
 
+### src/main/scala/shs/
+
+A collection of various **S**pinal**H**DL **s**amples.
+
 ### src/main/scala/ice40hx8k/
 
-A few other experiments with iCE40-HX8K.
+A few other (silly) experiments with iCE40-HX8K.
 
 ## How to actually build and upload the designs to an FPGA board?
 

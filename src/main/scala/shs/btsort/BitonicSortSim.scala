@@ -20,15 +20,13 @@ object BitonicSortSim {
         Vector(80, 70, 60, 50, 40, 30, 20, 10),
         Vector(40, 40, 70, 60, 10, 70, 50, 60))
 
-      for (value <- inputs) {
-        println(s"$value")
-        for (i <- value.indices)
-          dut.io.cmd.payload(i) #= value(i)
-        dut.io.cmd.valid #= true
+      for (values <- inputs) {
+        println(s"values=$values")
+        for (i <- values.indices)
+          dut.io.values(i) #= values(i)
         sleep(cycles = 10)
-        val valid = dut.io.rsp.valid.toBigInt
-        val result = dut.io.rsp.payload.toVector.map(_.toInt)
-        println(s"valid=$valid, result=$result")
+        val results = dut.io.results.toVector.map(_.toInt)
+        println(s"results=$results")
       }
     }
   }

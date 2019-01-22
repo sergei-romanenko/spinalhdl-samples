@@ -4,14 +4,11 @@ package shs.btsort
 
 object BitonicSortVN {
 
-  def swap(up: Boolean, x: Array[Int]): Unit = {
-    val h = x.length / 2
-    for (i <- 0 until h) {
-      if ((x(i) > x(i + h)) == up) { // swap
-        val xi = x(i)
-        x(i) = x(i + h)
-        x(i + h) = xi
-      }
+  def swap(up: Boolean, x: Array[Int], i: Int, j: Int): Unit = {
+    if ((x(i) > x(j)) == up) {
+      val tmp = x(i)
+      x(i) = x(j)
+      x(j) = tmp
     }
   }
 
@@ -21,7 +18,8 @@ object BitonicSortVN {
     if (l == 1)
       return x
     val h = l / 2
-    swap(up, x)
+    for (i <- 0 until h)
+      swap(up, x, i, i + h)
     merge(up, x.take(h)) ++ merge(up, x.drop(h))
   }
 
@@ -30,9 +28,9 @@ object BitonicSortVN {
     require((l & (l - 1)) == 0, "x.length must be a power of 2")
     if (l <= 1)
       return x
-    val dist = l / 2
-    val x1 = sort(up = true, x = x.take(dist))
-    val x2 = sort(up = false, x = x.drop(dist))
+    val h = l / 2
+    val x1 = sort(up = true, x = x.take(h))
+    val x2 = sort(up = false, x = x.drop(h))
     merge(up, x1 ++ x2)
   }
 }
@@ -42,8 +40,8 @@ object BitonicSortVNTest {
     val input = Vector(10, 30, 11, 20, 4, 330, 21, 110)
     for (incr <- Vector(true, false)) {
       val x = input.toArray
-      println(s"input = ${x.toVector}")
-      println(s"output = ${BitonicSortVN.sort(up = incr, x = x).toVector}")
+      println(s"inputs = ${x.toVector}")
+      println(s"outputs = ${BitonicSortVN.sort(up = incr, x = x).toVector}")
     }
   }
 }
