@@ -5,7 +5,7 @@ import spinal.lib._
 
 case class Debouncer() extends Component {
   val io = new Bundle {
-    val switch_input = in Bool
+    val btn_input = in Bool
     val state = out Bool
     val trans_up = out Bool
     val trans_dn = out Bool
@@ -16,7 +16,7 @@ case class Debouncer() extends Component {
 
   // Synchronize the switch input to the clock
   val sync_0, sync_1 = RegInit(False)
-  sync_0 := io.switch_input
+  sync_0 := io.btn_input
   sync_1 := sync_0
 
   // Debounce the switch

@@ -15,7 +15,7 @@ case class PWM(limit: BigInt, frequency: HertzNumber) extends Component {
     val on = RegInit(True)
     val cnt = Reg(valueType) init 0
 
-    cnt := cnt + 1
+    cnt := (cnt === limit - 1) ? U(0) | (cnt + 1)
     io.pwm_pin := (cnt < io.duty)
   }
 }

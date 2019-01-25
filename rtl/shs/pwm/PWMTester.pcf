@@ -9,5 +9,5 @@ set_io -nowarn  io_leds[5] A2
 set_io -nowarn  io_leds[6] B4
 set_io -nowarn  io_leds[7] B5
 
-set_io -nowarn  io_switch_up C1
-set_io -nowarn  io_switch_dn C2
+set_io -nowarn  io_btn_incr C1
+set_io -nowarn  io_btn_decr C2

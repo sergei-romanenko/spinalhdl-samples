@@ -8,35 +8,34 @@ import shs.lib._
 case class PWMTester
 (
   frequency: HertzNumber = 100 kHz,
-  limit: BigInt = 255,
-  step: BigInt = 32
+  limit: BigInt = 255
 ) extends Component {
 
   val io = new Bundle {
-    val switch_up = in Bool
-    val switch_dn = in Bool
+    val btn_incr = in Bool
+    val btn_decr = in Bool
     val leds = out UInt (8 bits)
   }
 
   def valueType = UInt(limit.bitLength bits)
 
-  val s_up, s_dn = Bool
+  val incr, decr = Bool
 
   val d1 = Debouncer()
-  d1.io.switch_input := io.switch_up
-  s_up := d1.io.trans_up
+  d1.io.btn_input := io.btn_incr
+  incr := d1.io.trans_up
   val d2 = Debouncer()
-  d2.io.switch_input := io.switch_dn
-  s_dn := d2.io.trans_up
+  d2.io.btn_input := io.btn_decr
+  decr := d2.io.trans_up
 
   val duty = Reg(valueType) init 0
 
-  when(s_up && duty <= limit - step) {
-    duty := duty + step
+  when(incr) {
+    duty := (duty |<< 1) + 1
   }
 
-  when(s_dn && duty >= step) {
-    duty := duty - step
+  when(decr) {
+    duty := duty |>> 1
   }
 
   val pwm = PWM(limit, frequency)
