@@ -1,7 +1,6 @@
-package obijuan.t23fsmtx
+package obijuan.lib
 
 import spinal.core._
-import spinal.lib._
 
 object BaudGen {
 

@@ -2,6 +2,7 @@ package obijuan.t23fsmtx
 
 import spinal.core._
 import spinal.lib._
+import obijuan.lib._
 
 case class FsmTx
 (

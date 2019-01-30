@@ -1,0 +1,21 @@
+set_io -nowarn clk J3
+
+set_io -nowarn  leds[0] C3
+set_io -nowarn  leds[1] B3
+set_io -nowarn  leds[2] C4
+set_io -nowarn  leds[3] C5
+set_io -nowarn  leds[4] A1
+set_io -nowarn  leds[5] A2
+set_io -nowarn  leds[6] B4
+set_io -nowarn  leds[7] B5
+
+# ------------ FTDI 1 ---------------------------------------------------------
+# UART
+set_io -nowarn tx  B12  # output
+set_io -nowarn rx  B10  # input
+set_io -nowarn rts B13  # input
+set_io -nowarn dtr A16  # input
+
+#set_io -nowarn dcd B15  # output
+#set_io -nowarn dsr B14  # output
+#set_io -nowarn cts A15  # output

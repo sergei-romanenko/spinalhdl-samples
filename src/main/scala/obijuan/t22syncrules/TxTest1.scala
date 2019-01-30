@@ -32,8 +32,6 @@ case class TxTest1
   val shifter = Reg(Bits(width = 10 bits))
   tx := enable ? shifter(0) | True
 
-  val byteK = 'K'.toByte
-
   when(!enable) {
     shifter := charByte ## B"2'b01"
   } elsewhen (enable && tick) {

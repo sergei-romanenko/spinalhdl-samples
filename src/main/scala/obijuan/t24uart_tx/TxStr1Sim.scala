@@ -1,14 +1,13 @@
-package obijuan.t23fsmtx
+package obijuan.t24uart_tx
 
+import obijuan.lib._
 import spinal.core._
 import spinal.core.sim._
-import spinal.sim._
-import obijuan.lib._
 
-object FsmTxSim {
+object TxStr1Sim {
 
-  val BAUD = BaudGen.B115200
-  val BITRATE = BAUD << 1
+  val BAUDRATE = BaudGen.B115200
+  val BITRATE = BAUDRATE << 1
   val FRAME = BITRATE * 11
   val FRAME_WAIT = BITRATE * 4
 
@@ -17,7 +16,7 @@ object FsmTxSim {
       .withConfig(SpinalConfig(
         defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT)))
       .withWave.compile(
-      FsmTx(BAUD = BAUD))
+      TxStr1(BAUDRATE = BAUDRATE))
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
 
@@ -29,12 +28,12 @@ object FsmTxSim {
       sleep(cycles = BITRATE * 2)
       dut.io.dtr #= false
 
-      sleep(cycles = FRAME_WAIT * 2)
+      sleep(cycles = FRAME * 11)
       dut.io.dtr #= true
-      sleep(cycles = FRAME * 1)
+      sleep(cycles = BITRATE * 1)
       dut.io.dtr #= false
 
-      sleep(cycles = FRAME_WAIT * 4)
+      sleep(cycles = FRAME * 11)
 
       for (k <- 0 until 1000) {
         dut.clockDomain.waitSampling()
