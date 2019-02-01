@@ -1,15 +1,14 @@
-package obijuan.t24uart_tx
+package shs.uart
 
 import spinal.core._
 import spinal.core.sim._
+import spinal.sim._
 
-import obijuan.lib._
+import shs.lib._
 
-object TxStr2Sim {
-
+object TxStrSim {
   val BAUDRATE = BaudGen.B115200
-  val DELAY = 10000
-  val BITRATE = BAUDRATE << 1
+  val BITRATE = BAUDRATE * 5
   val FRAME = BITRATE * 11
   val FRAME_WAIT = BITRATE * 4
 
@@ -17,18 +16,21 @@ object TxStr2Sim {
     val compiled = SimConfig
       .withConfig(SpinalConfig(
         defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT)))
-      .withWave.compile(
-      TxStr2(BAUDRATE = BAUDRATE, DELAY = DELAY))
+      .withWave.compile(TxStr(BAUDRATE, msg = "1234"))
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
 
-      sleep(cycles = FRAME * 20)
+      dut.io.dtr #= true
+      sleep(cycles = FRAME * 1)
+      dut.clockDomain.waitSampling()
 
-      for (k <- 0 until 10000) {
+      for(i <- 0 until 5000) {
+        dut.io.dtr #= false
+        //sleep(cycles = 10)
         dut.clockDomain.waitSampling()
       }
 
-      println("End of simulation")
+      println("END of simulation!")
     }
   }
 }
