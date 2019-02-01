@@ -18,14 +18,14 @@ object BaudGen {
 
 }
 
-case class BaudGen(M: Int = BaudGen.B115200) extends Component {
+case class BaudGen(BAUDRATE: Int) extends Component {
   val io = new Bundle {
     val enable = in Bool
     val tick = out Bool
   }
 
-  val max = M - 1
-  val width = log2Up(M)
+  val max = BAUDRATE - 1
+  val width = log2Up(BAUDRATE)
 
   val cnt = RegInit(U(0, width bits))
 

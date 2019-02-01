@@ -3,7 +3,7 @@ package obijuan.lib
 import spinal.core._
 import spinal.lib._
 
-case class UartTx(BAUDRATE: Int = BaudGen.B115200) extends Component {
+case class UartTx(BAUDRATE: Int) extends Component {
   val io = new Bundle {
     val start = in Bool
     val data = in Bits (8 bits)

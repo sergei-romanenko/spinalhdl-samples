@@ -16,7 +16,7 @@ object TxStr1Sim {
       .withConfig(SpinalConfig(
         defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT)))
       .withWave.compile(
-      TxStr1(BAUDRATE = BAUDRATE))
+      TxStr1(BAUDRATE))
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
 
