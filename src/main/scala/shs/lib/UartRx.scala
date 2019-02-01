@@ -1,4 +1,4 @@
-package obijuan.lib
+package shs.lib
 
 import spinal.core._
 import spinal.lib._
@@ -6,14 +6,13 @@ import spinal.lib._
 case class UartRx(BAUDRATE: Int) extends Component {
   val io = new Bundle {
     val rx = in Bool
-    val rcv = out Bool
-    val data = out Bits (8 bits)
+    val rsp = master Flow Bits (8 bits)
   }
 
-  val rcv = Reg(Bool)
-  io.rcv := rcv
+  val valid = Reg(Bool)
+  io.rsp.valid := valid
   val data = Reg(Bits(width = 8 bits)) init 0
-  io.data := data
+  io.rsp.payload := data
 
   // === Microinstructions
 
@@ -86,5 +85,5 @@ case class UartRx(BAUDRATE: Int) extends Component {
   baud_enable := (state === RECV)
   clear := (state === IDLE)
   load := (state === LOAD)
-  rcv := (state === DAV)
+  valid := (state === DAV)
 }

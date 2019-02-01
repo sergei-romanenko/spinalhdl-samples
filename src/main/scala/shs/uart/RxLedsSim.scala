@@ -1,10 +1,11 @@
-package obijuan.t25uart_rx
+package shs.uart
 
-import obijuan.lib._
 import spinal.core._
 import spinal.core.sim._
 
-object EchoSim {
+import shs.lib._
+
+object RxLedsSim {
 
   val BAUDRATE = BaudGen.B115200
   val BITRATE = BAUDRATE * 10
@@ -16,7 +17,7 @@ object EchoSim {
       .withConfig(SpinalConfig(
         defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT)))
       .withWave.compile(
-      RxEcho(BAUDRATE))
+      RxLeds(BAUDRATE))
     compiled.doSim { dut =>
       dut.clockDomain.forkStimulus(period = 10)
 
@@ -35,11 +36,14 @@ object EchoSim {
 
       sleep(cycles = BITRATE)
       send_byte(byte = 0x55.toInt)
+      dut.clockDomain.waitSampling()
 
-      sleep(cycles = FRAME_WAIT * 3)
+      sleep(cycles = FRAME_WAIT)
       send_byte(byte = 'K'.toInt)
+      dut.clockDomain.waitSampling()
 
-      sleep(cycles = FRAME_WAIT * 4)
+      sleep(cycles = FRAME_WAIT*4)
+      dut.clockDomain.waitSampling()
       println("End of simulation")
     }
   }

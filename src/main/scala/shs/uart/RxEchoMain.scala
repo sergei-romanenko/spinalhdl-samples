@@ -1,13 +1,13 @@
-package obijuan.t25uart_rx
+package shs.uart
 
 import spinal.core._
 
-object EchoMain {
+object RxEchoMain {
   def main(args: Array[String]) {
     SpinalConfig(
       defaultConfigForClockDomains = ClockDomainConfig(resetKind = BOOT),
       defaultClockDomainFrequency = FixedFrequency(12 MHz),
-      targetDirectory = "rtl/obijuan/t25uart-rx/rxecho"
+      targetDirectory = "rtl/shs/uart/rxecho"
     ).generateVerilog(RxEcho())
   }
 }

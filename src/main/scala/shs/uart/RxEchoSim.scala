@@ -1,10 +1,10 @@
-package obijuan.t25uart_rx
+package shs.uart
 
-import obijuan.lib._
 import spinal.core._
 import spinal.core.sim._
+import shs.lib._
 
-object EchoSim {
+object RxEchoSim {
 
   val BAUDRATE = BaudGen.B115200
   val BITRATE = BAUDRATE * 10
