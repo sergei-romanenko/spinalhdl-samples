@@ -2,6 +2,7 @@ package shs.lib
 
 import spinal.core._
 import spinal.lib._
+import spinal.lib.fsm._
 
 case class UartRx(BAUDRATE: Int) extends Component {
   val io = new Bundle {
@@ -9,16 +10,16 @@ case class UartRx(BAUDRATE: Int) extends Component {
     val rsp = master Flow Bits (8 bits)
   }
 
-  val valid = Reg(Bool)
+  val valid = Reg(Bool) init False
   io.rsp.valid := valid
   val data = Reg(Bits(width = 8 bits)) init 0
   io.rsp.payload := data
 
   // === Microinstructions
 
-  val baud_enable = Reg(Bool)
-  val clear = Reg(Bool)
-  val load = Reg(Bool)
+  val baud_enable = Reg(Bool) init False
+  val clear = Reg(Bool) init False
+  val load = Reg(Bool) init False
 
   // == Baudrate ticks
 
@@ -51,39 +52,41 @@ case class UartRx(BAUDRATE: Int) extends Component {
 
   // === Controller
 
-  // States
-  object FsmState extends SpinalEnum {
-    val IDLE, RECV, LOAD, DAV = newElement()
+  // Defaults
+  baud_enable := False
+  clear := False
+  load := False
+  valid := False
+
+  val fsm = new StateMachine {
+    val IDLE: State = new State with EntryPoint
+    val RECV, LOAD, DAV: State = new State
+
+    IDLE.whenIsActive {
+      clear := True
+      when(!rx) {
+        goto(RECV)
+      }
+    }
+
+    RECV.whenIsActive {
+      baud_enable := True
+      when(bitc === 10) {
+        goto(LOAD)
+      }
+    }
+
+    LOAD.whenIsActive {
+      load := True
+      goto(DAV)
+    }
+
+    DAV.whenIsActive {
+      valid := True
+      when(rx) {
+        goto(IDLE)
+      }
+    }
   }
 
-  import FsmState._
-
-  // === FSM
-
-  val state = RegInit(IDLE)
-
-  switch(state) {
-    is(IDLE) {
-      when(!rx)(state := RECV) otherwise (state := IDLE)
-    }
-
-    is(RECV) {
-      when(bitc === 10)(state := LOAD) otherwise (state := RECV)
-    }
-
-    is(LOAD) {
-      state := DAV
-    }
-
-    is(DAV) {
-      when(rx) (state := IDLE) otherwise (state := DAV)
-    }
-  }
-
-  // === Generating the microinstructions
-
-  baud_enable := (state === RECV)
-  clear := (state === IDLE)
-  load := (state === LOAD)
-  valid := (state === DAV)
 }
