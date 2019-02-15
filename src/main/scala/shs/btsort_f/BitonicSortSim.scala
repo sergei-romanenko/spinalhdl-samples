@@ -1,4 +1,4 @@
-package shs.btsort
+package shs.btsort_f
 
 import spinal.core._
 import spinal.core.sim._

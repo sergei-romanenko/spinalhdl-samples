@@ -4,7 +4,7 @@ import spinal.core._
 import spinal.lib._
 
 case class BitonicSort(width: Int = 8, size: Int = 16) extends Component {
-  require((size & (size - 1)) == 0, "Size must be a power of 2")
+  require(isPow2(size), "Size must be a power of 2")
 
   def dataType = UInt(width bits)
 

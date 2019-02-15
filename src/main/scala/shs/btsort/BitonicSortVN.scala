@@ -1,5 +1,7 @@
 package shs.btsort
 
+import spinal.core.isPow2
+
 // A von Neumann algorithm!
 
 object BitonicSortVN {
@@ -25,7 +27,7 @@ object BitonicSortVN {
 
   def sort(up: Boolean, x: Array[Int]): Array[Int] = {
     val l = x.length
-    require((l & (l - 1)) == 0, "x.length must be a power of 2")
+    require(isPow2(l), "x.length must be a power of 2")
     if (l <= 1)
       return x
     val h = l / 2
@@ -38,10 +40,10 @@ object BitonicSortVN {
 object BitonicSortVNTest {
   def main(args: Array[String]): Unit = {
     val input = Vector(10, 30, 11, 20, 4, 330, 21, 110)
-    for (incr <- Vector(true, false)) {
-      val x = input.toArray
-      println(s"inputs = ${x.toVector}")
-      println(s"outputs = ${BitonicSortVN.sort(up = incr, x = x).toVector}")
-    }
+    val x = input.toArray
+    println(s"inputs = $input")
+    val result = BitonicSortVN.sort(up = true, input.toArray).toVector
+    println(s"outputs = $result")
+    require(input.sorted == result)
   }
 }
